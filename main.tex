@@ -1,0 +1,212 @@
+% !TeX program = xelatex
+% =====================================================================
+%  个人简历模板（中文 · 单页 · XeLaTeX）
+% ---------------------------------------------------------------------
+%  编译：xelatex main.tex      （或 make）
+%  环境：TeX Live 2023+ / Overleaf（Menu → Compiler → XeLaTeX）
+%  字体：英文 TeX Gyre Pagella；中文优先楷体（Windows: KaiTi，
+%        其他平台: TeX Live 自带 FandolKai，缺失时回退 Noto Serif CJK SC）
+%
+%  怎么用：
+%    下面所有经历条目都是【填写指引】，不是任何人的真实经历。
+%    搜索 “TODO” 找到要替换的位置，然后把整条指引文字覆盖成你自己的内容。
+%    - 版式已经按“写满一页”调好：替换后超出第二页时，优先删条目，
+%      其次调 \linespread{1.15} 与 itemize 的 itemsep，最后才动 geometry 边距。
+%    - 加证件照：把 photo.jpg 放到本文件同目录，取消照片区里
+%      \includegraphics 那行注释、删掉占位框即可。
+%
+%  版式宏（改内容时不用动）：
+%    \entry{单位/项目}{身份或方向}{时间}   一行抬头：左标题 / 中说明 / 右时间
+%    \subline{说明}                        抬头下的一行小字简介
+%    \skillitem{分类}{内容}                技能条目（加粗分类 + 冒号）
+%    \ulink{URL}{显示文本}                 带下划线的主题色链接
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[UTF8,fontset=none]{ctex}
+\usepackage{fontspec}
+\usepackage[left=1.15cm,right=1.15cm,top=0.85cm,bottom=0.8cm]{geometry}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{xurl}
+\usepackage{hyperref}
+
+\defaultfontfeatures{
+    Extension=.otf,
+    UprightFont=*-regular,
+    BoldFont=*-bold,
+    ItalicFont=*-italic,
+    BoldItalicFont=*-bolditalic,
+    Numbers=Lining}
+\setmainfont{texgyrepagella}
+\setsansfont{texgyrepagella}
+\defaultfontfeatures{}   % 清空默认项，下面的中文字体各自显式指定
+% 正文中文用楷体；楷体无粗体，加粗与标题用黑体，混排更清晰
+\IfFontExistsTF{KaiTi}{%
+    \IfFontExistsTF{SimHei}{%
+        \setCJKmainfont{KaiTi}[BoldFont=SimHei]%
+    }{%
+        \setCJKmainfont{KaiTi}[AutoFakeBold=2.5]%
+    }%
+}{%
+    \IfFontExistsTF{FandolKai-Regular.otf}{%
+        \setCJKmainfont{FandolKai-Regular.otf}[BoldFont=FandolHei-Regular.otf]%
+        \setCJKsansfont{FandolHei-Regular.otf}%
+    }{%
+        \setCJKmainfont{Noto Serif CJK SC}[BoldFont=Noto Sans CJK SC]%
+        \setCJKsansfont{Noto Sans CJK SC}%
+    }%
+}
+
+\definecolor{theme}{HTML}{1A2B3C}       % 主色：沉稳炭青
+\definecolor{textmain}{HTML}{222222}    % 正文
+\definecolor{textmuted}{HTML}{5A5A5A}   % 次级信息
+\definecolor{linecolor}{HTML}{D0D7DE}   % 分割线
+
+\color{textmain}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{1.15}
+\emergencystretch=2em
+\tolerance=3000
+
+% 带下划线的链接（URL 短，不会跨行）
+\newcommand{\ulink}[2]{\href{#1}{\color{theme}\underline{#2}}}
+\newcommand{\skillitem}[2]{\item \textbf{#1}：\,#2}
+
+% 经历抬头：标题靠左、身份/方向居中、时间靠右（等间距分布，标题过长只会报 Overfull，不会压字）
+\newcommand{\entry}[3]{%
+    \par\addvspace{2.9pt}%
+    \noindent
+    \hbox to \linewidth{%
+        {\bfseries\fontsize{11.5}{14}\selectfont\color{theme}#1}%
+        \hfil{\small\color{textmuted}#2}%
+        \hfil{\small\color{textmuted}#3}%
+    }\par\nobreak\vspace{1pt}%
+}
+% 经历下方的一行说明（实习业务方向 / 项目简介）
+\newcommand{\subline}[1]{{\small\color{textmuted}#1}\par\nobreak\vspace{1.5pt}}
+
+\titleformat{\section}
+    {\large\bfseries\color{theme}}{}{0pt}{}
+    [{\vspace{1.5pt}\color{linecolor}\hrule height 0.7pt}]
+\titlespacing*{\section}{0pt}{8.4pt}{3pt}
+
+\setlist[itemize]{
+    leftmargin=1.15em,
+    labelsep=0.45em,
+    itemsep=2.9pt,
+    parsep=0pt,
+    topsep=1.8pt,
+    label={\small\color{theme}\textbullet}
+}
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=theme,
+    linkcolor=theme,
+    pdfauthor={你的姓名},
+    pdftitle={你的姓名 · 个人简历}
+}
+
+\begin{document}
+
+% ===================== 头部：姓名 + 求职方向 + 联系方式 + 证件照 =====================
+\begin{minipage}[c]{0.83\linewidth}
+    % TODO 姓名、求职方向（一行说清你投什么岗）
+    {\bfseries\fontsize{25}{28}\selectfont\color{theme}张三}%
+    \hspace{0.85em}{\fontsize{13.5}{16}\selectfont\color{theme}求职方向（如：后端开发 / 分布式系统）}\par
+    \vspace{4pt}
+    % TODO 基本信息：只留对求职有用的（届别、城市意向等），不需要的项直接删
+    {\small\color{textmuted}性别 · 年龄 · 20XX 届本科 · 期望城市}\par
+    \vspace{3pt}
+    % TODO 电话、邮箱、GitHub / 博客（务必写成可点击或可复制的真实值）
+    {\small
+        138-0000-0000 \quad
+        zhangsan@example.com \quad
+        \ulink{https://github.com/example}{github.com/example}
+    }
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.13\linewidth}
+    \raggedleft
+    {\color{linecolor}\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{0.5pt}%
+    % 有证件照时，改为下面这行，并删掉占位框：
+    % \fbox{\includegraphics[height=2.4cm]{photo.jpg}}
+    \fbox{\parbox[c][2.4cm][c]{1.85cm}{\centering\small\color{textmuted}照片\\（可选）}}}
+\end{minipage}
+
+% ===================== 教育背景与荣誉 =====================
+\section{教育背景与荣誉}
+% TODO 学校 / 专业 / 学历 / 排名；排名不占优就删掉，别硬写
+\entry{某某大学}{某某专业 · 本科 · 专业排名前 \textbf{XX\%}}{20XX.09 — 20XX.06}
+% TODO 一行补充：主修课程 / GPA / 研究方向，没有亮点就整行删掉
+\subline{一行补充：与岗位相关的课程、GPA 或研究方向。}
+{\small
+% 奖项双栏；行尾 [3.8pt] 为行间距微调（每行间距约 15.5pt）
+% TODO 换成你自己的奖项，按含金量或时间排序，只留拿得出手的；不足就删掉整行
+\begin{tabularx}{\linewidth}{@{}X@{\hspace{1.2em}}X@{}}
+    某某竞赛 \textbf{国家级二等奖} \hfill 20XX.05 &
+    某某竞赛 \textbf{省级一等奖} \hfill 20XX.10 \\[3.8pt]
+    某某奖学金 \textbf{校级一等奖} \hfill 20XX.09 &
+    某某竞赛 \textbf{省级二等奖} \hfill 20XX.06 \\[3.8pt]
+    某某荣誉称号 \textbf{校级} \hfill 20XX.05 &
+    某某证书 / 等级考试 \textbf{已通过} \hfill 20XX.03
+\end{tabularx}}
+
+% ===================== 实习经历 =====================
+\section{实习经历}
+% TODO 公司 / 岗位 / 起止时间；没有实习就整段删掉，把项目经历提前
+\entry{某某公司}{岗位（如：后端开发实习生）}{20XX.06 — 20XX.09}
+% TODO 一句话交代：团队或业务方向 + 你负责的范围
+\subline{一句话交代你所在的业务方向，以及你独立负责的部分。}
+\begin{itemize}
+    % 每条 bullet 的建议写法：背景或问题 → 你做了什么（技术点加粗）→ 结果
+    % 结果不一定非得是数字：影响范围、"上线后再没出现过 XX" 同样有效，不必每条都带指标
+    \item \textbf{工作内容一}：先写清要解决什么问题（业务背景与痛点），再写你的做法与关键技术点，最后交代结果——有数据就写数据，没有就写影响范围（服务多少用户、多大流量）或上线后的变化。
+    \item \textbf{工作内容二}：同一条式，一条 bullet 控制在 1\textasciitilde2 行；超过 3 行说明信息太杂，该拆成两条或删掉。
+    \item \textbf{工作内容三}：突出你的个人贡献而不是团队成果：写清你独立负责的模块、你做的决策，以及你和其他角色怎么配合。
+\end{itemize}
+
+% ===================== 项目经历 =====================
+\section{项目经历}
+% TODO 项目名 — 一句话定位 / 你的角色 / 技术栈 / 仓库链接 / 时间
+\entry{项目一 — 一句话定位}{个人项目 · 技术栈 A / 技术栈 B · \ulink{https://github.com/example/project}{仓库链接（可选）}}{20XX.01 — 20XX.06}
+% TODO 一句话简介：解决什么问题、面向什么场景、规模或部署形态
+\subline{一句话说清项目解决什么问题、给谁用、现在是什么形态。}
+\begin{itemize}
+    \item \textbf{项目亮点一}：这条最能体现技术深度，写清方案取舍与为什么不用更常见的做法，以及最终效果；面试官几乎一定会追问这条，写完先自问能不能扛住。
+    \item \textbf{项目亮点二}：建议用关键技术点开头（如 \textbf{XX 数据结构 / 算法 / 框架}），再补效果（吞吐、延迟、体积、成本或准确率，挑一个真正测过的写）。
+    \item \textbf{项目亮点三}：写工程化部分：测试覆盖、构建与部署方式、可观测性，证明这是一个能跑起来的完整作品。
+    \item \textbf{项目亮点四}：可选，写你踩过的坑、被否掉的方案与最终如何解决；这条最能体现成长，但没有就删掉，别硬凑。
+\end{itemize}
+
+\entry{项目二 — 一句话定位}{团队项目 · 你负责的模块 · 技术栈 C}{20XX.09 — 20XX.01}
+\subline{一句话说明项目背景与你负责的边界。}
+\begin{itemize}
+    \item \textbf{负责模块}：写清你做了什么、和谁协作、交付了什么。
+    \item \textbf{结果与复盘}：写最终收益或关键取舍；没有硬指标就写实际使用情况。
+    \item \textbf{可选条目}：没有第三点就删掉，别为了凑数写空话。
+\end{itemize}
+
+% 第三段经历：开源贡献 / 竞赛作品 / 校园经历都可以放这里，不需要就整段删掉
+\entry{其他经历 — 一句话定位}{开源贡献 / 竞赛作品 / 校园经历（按需保留）}{20XX.XX}
+{\small 一两句话写清你做了什么、产出了什么；有链接就写成 \ulink{https://example.com}{可点击的链接}。}\par
+
+% ===================== 专业技能 =====================
+\section{专业技能}
+\begin{itemize}
+    % TODO 按目标岗位调整分类与关键词：写熟不写多，写在简历上的每一项都要经得起追问
+    \skillitem{编程语言}{最熟练的写在最前面，只写能被追问的语言}
+    \skillitem{框架与中间件}{按目标岗位填：数据库、缓存、消息队列、Web 框架等}
+    \skillitem{工具与工程}{版本控制、构建、测试、部署、性能分析等}
+    \skillitem{语言与证书}{英语水平、等级考试、行业认证}
+    \skillitem{其他}{算法基础、协作方式、与岗位相关的加分项}
+\end{itemize}
+
+\end{document}

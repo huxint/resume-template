@@ -1,0 +1,174 @@
+% !TeX program = xelatex
+% =====================================================================
+%  示例简历 02 · 算法工程师（大模型 / NLP） · 硕士校招
+%  写法说明：结果多用"比例变化"和"对人的影响"来表达，不堆延迟类指标。
+%  【虚构声明】人物用通用占位名（李四），学校与公司一律以“示例”开头，均为虚构。
+%  奖项、指标同样是编造的，不指向任何真实个人、学校或公司。
+%  编译：xelatex 02-algorithm.tex   （或在本仓库 make examples）
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[UTF8,fontset=none]{ctex}
+\usepackage{fontspec}
+\usepackage[left=1.15cm,right=1.15cm,top=0.85cm,bottom=0.8cm]{geometry}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{xurl}
+\usepackage{hyperref}
+
+\defaultfontfeatures{
+    Extension=.otf,
+    UprightFont=*-regular,
+    BoldFont=*-bold,
+    ItalicFont=*-italic,
+    BoldItalicFont=*-bolditalic,
+    Numbers=Lining}
+\setmainfont{texgyrepagella}
+\setsansfont{texgyrepagella}
+\defaultfontfeatures{}   % 清空默认项，下面的中文字体各自显式指定
+% 正文中文用楷体；楷体无粗体，加粗与标题用黑体，混排更清晰
+\IfFontExistsTF{KaiTi}{%
+    \IfFontExistsTF{SimHei}{%
+        \setCJKmainfont{KaiTi}[BoldFont=SimHei]%
+    }{%
+        \setCJKmainfont{KaiTi}[AutoFakeBold=2.5]%
+    }%
+}{%
+    \IfFontExistsTF{FandolKai-Regular.otf}{%
+        \setCJKmainfont{FandolKai-Regular.otf}[BoldFont=FandolHei-Regular.otf]%
+        \setCJKsansfont{FandolHei-Regular.otf}%
+    }{%
+        \setCJKmainfont{Noto Serif CJK SC}[BoldFont=Noto Sans CJK SC]%
+        \setCJKsansfont{Noto Sans CJK SC}%
+    }%
+}
+
+\definecolor{theme}{HTML}{1A2B3C}       % 主色：沉稳炭青
+\definecolor{textmain}{HTML}{222222}    % 正文
+\definecolor{textmuted}{HTML}{5A5A5A}   % 次级信息
+\definecolor{linecolor}{HTML}{D0D7DE}   % 分割线
+
+\color{textmain}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{1.15}
+\emergencystretch=2em
+\tolerance=3000
+
+% 带下划线的链接（URL 短，不会跨行）
+\newcommand{\ulink}[2]{\href{#1}{\color{theme}\underline{#2}}}
+\newcommand{\skillitem}[2]{\item \textbf{#1}：\,#2}
+
+% 经历抬头：标题靠左、身份/方向居中、时间靠右（等间距分布，标题过长只会报 Overfull，不会压字）
+\newcommand{\entry}[3]{%
+    \par\addvspace{2.9pt}%
+    \noindent
+    \hbox to \linewidth{%
+        {\bfseries\fontsize{11.5}{14}\selectfont\color{theme}#1}%
+        \hfil{\small\color{textmuted}#2}%
+        \hfil{\small\color{textmuted}#3}%
+    }\par\nobreak\vspace{1pt}%
+}
+% 经历下方的一行说明（实习业务方向 / 项目简介）
+\newcommand{\subline}[1]{{\small\color{textmuted}#1}\par\nobreak\vspace{1.5pt}}
+
+\titleformat{\section}
+    {\large\bfseries\color{theme}}{}{0pt}{}
+    [{\vspace{1.5pt}\color{linecolor}\hrule height 0.7pt}]
+\titlespacing*{\section}{0pt}{8.4pt}{3pt}
+
+\setlist[itemize]{
+    leftmargin=1.15em,
+    labelsep=0.45em,
+    itemsep=2.9pt,
+    parsep=0pt,
+    topsep=1.8pt,
+    label={\small\color{theme}\textbullet}
+}
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=theme,
+    linkcolor=theme,
+    pdfauthor={你的姓名},
+    pdftitle={你的姓名 · 个人简历}
+}
+
+\begin{document}
+\hypersetup{pdfauthor={李四}, pdftitle={李四 · 个人简历}}
+
+\begin{minipage}[c]{0.83\linewidth}
+    {\bfseries\fontsize{25}{28}\selectfont\color{theme}李四}%
+    \hspace{0.85em}{\fontsize{13.5}{16}\selectfont\color{theme}算法工程师（大模型 / NLP）}\par
+    \vspace{4pt}
+    {\small\color{textmuted}女 · 24 岁 · 2027 届硕士 · 北京 / 杭州}\par
+    \vspace{3pt}
+    {\small
+        139-0000-0002 \quad
+        lisi@example.com \quad
+        \ulink{https://github.com/example}{github.com/example}
+    }
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.13\linewidth}
+    \raggedleft
+    {\color{linecolor}\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{0.5pt}%
+    \fbox{\parbox[c][2.4cm][c]{1.85cm}{\centering\small\color{textmuted}照片\\（可选）}}}
+\end{minipage}
+
+\section{教育背景与荣誉}
+\entry{示例大学}{计算机技术 · 硕士 · GPA 3.9 / 4.0}{2025.09 — 2027.06}
+\entry{示例大学}{计算机科学与技术 · 本科 · 专业排名前 \textbf{5\%}}{2021.09 — 2025.06}
+\subline{研究方向：检索增强生成与领域大模型微调；主修机器学习、信息检索、自然语言处理。}
+{\small
+\begin{tabularx}{\linewidth}{@{}X@{\hspace{1.2em}}X@{}}
+    % 只有 3 条：最后一行右列留空就行，不用为了左右对称硬凑一个奖
+    中国高校计算机大赛 · 人工智能创意赛 \textbf{国家二等奖} \hfill 2023.11 &
+    研究生学业奖学金 \textbf{一等} \hfill 2025.10 \\[3.8pt]
+    校级优秀毕业设计 \hfill 2025.06 &
+\end{tabularx}}
+
+\section{实习经历}
+\entry{示例智能}{大模型算法实习生}{2025.07 — 2026.01}
+\subline{企业知识库问答：检索链路、指令微调与推理部署。}
+\begin{itemize}
+    \item 负责检索侧的多路召回与重排，把 BM25 和向量召回的结果做融合；上线后答非所问、引用错文档的情况明显减少，抽检通过率从七成提到九成上下。
+    \item 整理了三万多条领域指令数据并做质量过滤，用 \textbf{LoRA} 在 7B 模型上微调，模型开始能答对内部术语和审批流程这类问题。
+    \item 换成 \textbf{vLLM} 部署并做了量化，单卡能同时服务的并发翻了几倍，首 token 的等待从"用户以为卡住了"降到可以接受的范围。
+    \item 搭了离线评测流水线（人工标注样本 + 自动打分），调完 prompt 或检索参数当天就能看效果，不用再等一周排期。
+\end{itemize}
+
+\section{项目经历}
+\entry{多模态检索复现 — 论文复现项目}{独立完成 · PyTorch · \ulink{https://github.com/example/mm-retrieval}{github.com/example/mm-retrieval}}{2025.03 — 2025.07}
+\subline{复现一篇跨模态检索论文，在自建中文图文数据集上对齐原论文指标并开源训练与评测脚本。}
+\begin{itemize}
+    \item 复现时对齐了原论文的 Recall 指标；后来把视觉编码器换成更轻的版本，效果没有掉，训练显存也降下来了。
+    \item 自己清洗了五十万对图文数据，做了分层评测集和一键评测脚本，后面换参数重跑实验不用再改代码。
+    \item 用混合精度 + 梯度累积把单轮训练压到十小时以内，实验室那张卡终于排得开，实验节奏快了一倍。
+\end{itemize}
+
+\entry{领域问答系统 — 课程项目}{团队项目 · 负责检索与评测 · Python / FastAPI}{2024.09 — 2025.01}
+\subline{面向校内规章制度的检索式问答系统，上线后累计回答两千多次查询。}
+\begin{itemize}
+    \item 标题和正文双路召回后做融合排序，只用标题时经常答不到点上，改完首答命中率比之前高了一截。
+    \item 用 FastAPI 加结果缓存部署，单机跑几十个并发没问题，平均响应在几百毫秒。
+\end{itemize}
+
+\entry{开源贡献 — 推理框架显存优化}{社区贡献者 · CUDA / C++}{2025.11 — 2026.02}
+{\small 参与开源推理框架的 KV Cache 优化（分页 + 复用），长文本场景下不再动辄 OOM；\textbf{3} 个 PR 已合入主干，优化过程整理成技术博客。}\par
+
+\section{专业技能}
+\begin{itemize}
+    \skillitem{编程语言}{Python（主力）、C++、SQL、Shell}
+    \skillitem{算法与模型}{PyTorch、Transformers、LoRA / SFT、RAG、向量检索与重排、vLLM}
+    \skillitem{数据与评测}{数据清洗与标注、评测集构建、离线评测与 A/B 实验}
+    \skillitem{科研与竞赛}{机器学习与算法竞赛获奖；参与实验室横向课题两项}
+    \skillitem{其他}{英文论文阅读与写作、Linux、Git、Docker}
+\end{itemize}
+
+\end{document}

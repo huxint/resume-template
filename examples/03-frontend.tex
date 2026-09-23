@@ -1,0 +1,180 @@
+% !TeX program = xelatex
+% =====================================================================
+%  示例简历 03 · 前端开发 · 本科校招
+%  写法说明：用校园项目和学生工作撑起版面，指标只写前端真正关心的
+%  （加载、体积、帧率），其余条目写清做了什么和协作方式。
+%  【虚构声明】人物用通用占位名（王五），学校与公司一律以“示例”开头，均为虚构。
+%  奖项、指标同样是编造的，不指向任何真实个人、学校或公司。
+%  编译：xelatex 03-frontend.tex   （或在本仓库 make examples）
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[UTF8,fontset=none]{ctex}
+\usepackage{fontspec}
+\usepackage[left=1.15cm,right=1.15cm,top=0.85cm,bottom=0.8cm]{geometry}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{xurl}
+\usepackage{hyperref}
+
+\defaultfontfeatures{
+    Extension=.otf,
+    UprightFont=*-regular,
+    BoldFont=*-bold,
+    ItalicFont=*-italic,
+    BoldItalicFont=*-bolditalic,
+    Numbers=Lining}
+\setmainfont{texgyrepagella}
+\setsansfont{texgyrepagella}
+\defaultfontfeatures{}   % 清空默认项，下面的中文字体各自显式指定
+% 正文中文用楷体；楷体无粗体，加粗与标题用黑体，混排更清晰
+\IfFontExistsTF{KaiTi}{%
+    \IfFontExistsTF{SimHei}{%
+        \setCJKmainfont{KaiTi}[BoldFont=SimHei]%
+    }{%
+        \setCJKmainfont{KaiTi}[AutoFakeBold=2.5]%
+    }%
+}{%
+    \IfFontExistsTF{FandolKai-Regular.otf}{%
+        \setCJKmainfont{FandolKai-Regular.otf}[BoldFont=FandolHei-Regular.otf]%
+        \setCJKsansfont{FandolHei-Regular.otf}%
+    }{%
+        \setCJKmainfont{Noto Serif CJK SC}[BoldFont=Noto Sans CJK SC]%
+        \setCJKsansfont{Noto Sans CJK SC}%
+    }%
+}
+
+\definecolor{theme}{HTML}{1A2B3C}       % 主色：沉稳炭青
+\definecolor{textmain}{HTML}{222222}    % 正文
+\definecolor{textmuted}{HTML}{5A5A5A}   % 次级信息
+\definecolor{linecolor}{HTML}{D0D7DE}   % 分割线
+
+\color{textmain}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{1.15}
+\emergencystretch=2em
+\tolerance=3000
+
+% 带下划线的链接（URL 短，不会跨行）
+\newcommand{\ulink}[2]{\href{#1}{\color{theme}\underline{#2}}}
+\newcommand{\skillitem}[2]{\item \textbf{#1}：\,#2}
+
+% 经历抬头：标题靠左、身份/方向居中、时间靠右（等间距分布，标题过长只会报 Overfull，不会压字）
+\newcommand{\entry}[3]{%
+    \par\addvspace{2.9pt}%
+    \noindent
+    \hbox to \linewidth{%
+        {\bfseries\fontsize{11.5}{14}\selectfont\color{theme}#1}%
+        \hfil{\small\color{textmuted}#2}%
+        \hfil{\small\color{textmuted}#3}%
+    }\par\nobreak\vspace{1pt}%
+}
+% 经历下方的一行说明（实习业务方向 / 项目简介）
+\newcommand{\subline}[1]{{\small\color{textmuted}#1}\par\nobreak\vspace{1.5pt}}
+
+\titleformat{\section}
+    {\large\bfseries\color{theme}}{}{0pt}{}
+    [{\vspace{1.5pt}\color{linecolor}\hrule height 0.7pt}]
+\titlespacing*{\section}{0pt}{8.4pt}{3pt}
+
+\setlist[itemize]{
+    leftmargin=1.15em,
+    labelsep=0.45em,
+    itemsep=2.9pt,
+    parsep=0pt,
+    topsep=1.8pt,
+    label={\small\color{theme}\textbullet}
+}
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=theme,
+    linkcolor=theme,
+    pdfauthor={你的姓名},
+    pdftitle={你的姓名 · 个人简历}
+}
+
+\begin{document}
+\hypersetup{pdfauthor={王五}, pdftitle={王五 · 个人简历}}
+
+\begin{minipage}[c]{0.83\linewidth}
+    {\bfseries\fontsize{25}{28}\selectfont\color{theme}王五}%
+    \hspace{0.85em}{\fontsize{13.5}{16}\selectfont\color{theme}前端开发（React / TypeScript）}\par
+    \vspace{4pt}
+    {\small\color{textmuted}男 · 21 岁 · 2027 届本科 · 深圳 / 广州}\par
+    \vspace{3pt}
+    {\small
+        137-0000-0003 \quad
+        wangwu@example.com \quad
+        \ulink{https://github.com/example}{github.com/example}
+    }
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.13\linewidth}
+    \raggedleft
+    {\color{linecolor}\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{0.5pt}%
+    \fbox{\parbox[c][2.4cm][c]{1.85cm}{\centering\small\color{textmuted}照片\\（可选）}}}
+\end{minipage}
+
+\section{教育背景与荣誉}
+\entry{示例工业大学}{软件工程 · 本科 · 专业排名前 \textbf{15\%}}{2023.09 — 2027.06}
+\subline{主修课程：数据结构与算法、计算机网络、数据库系统、人机交互、Web 前端技术（GPA 3.6 / 4.0）。}
+{\small
+\begin{tabularx}{\linewidth}{@{}X@{\hspace{1.2em}}X@{}}
+    % 经历本身不占优时，荣誉少写几条完全不丢分：一行两列也能收住
+    省级大学生程序设计竞赛 \textbf{省级二等奖} \hfill 2025.05 &
+    校科技创新大赛 \textbf{校级一等奖} \hfill 2024.11
+\end{tabularx}}
+
+\section{校园与开源经历}
+\entry{校计算机协会}{技术部部长}{2024.09 — 2025.09}
+\subline{带 8 人前端小组维护协会官网与活动报名系统，累计服务三千多人次。}
+\begin{itemize}
+    \item 用 Vite + React + TS 重写协会官网，首屏加载从三秒多降到一秒内，Lighthouse 性能分从六十多提到九十以上。
+    \item 报名系统支撑了三场校级活动，峰值八百人同时在线，活动期间没有出现报名丢失或重复提交。
+    \item 组织前端分享与代码评审，带两名新同学从零完成页面开发；顺带把项目的脚手架和提交规范定下来。
+\end{itemize}
+
+\entry{开源贡献 — example-ui 组件库}{社区贡献者 · \ulink{https://github.com/example}{github.com/example}}{2025.03 — 至今}
+{\small 修表单校验与无障碍相关的缺陷，累计 \textbf{6} 个 PR 合入主干；提交的 Table 虚拟滚动方案被采纳为默认实现，长列表滚动不再掉帧。}\par
+
+\section{项目经历}
+\entry{运营数据看板 — 可视化大屏}{独立开发 · React / ECharts / WebSocket}{2025.06 — 2025.10}
+\subline{面向运营同学的实时数据看板，支持拖拽布局、定时刷新与大屏投放。}
+\begin{itemize}
+    \item 图表按需渲染 + 数据分片推送，五十个图表同时刷新也不卡；页面长时间挂着内存不会一直往上涨。
+    \item 抽了 \textbf{18} 个可复用图表组件和一套配置协议，新看板接入从两天缩到半天，运营同学自己填配置就能上线。
+    \item 用 WebSocket 做增量推送并加本地缓存，断线自动重连；弱网环境下数据不会丢，也不会整屏闪烁。
+    \item 接入 ESLint + Vitest + Playwright，核心交互有三十多个用例覆盖，发布前自动跑一遍端到端。
+\end{itemize}
+
+\entry{校园二手交易小程序}{团队项目 · 前端负责人 · 微信小程序}{2024.10 — 2025.01}
+\begin{itemize}
+    \item 统一封装请求、鉴权与分包加载，包体从 2.4\,MB 降到 1.1\,MB，冷启动控制在 1.5\,s 内。
+    \item 和两名同学配合完成商品、聊天与订单模块，负责接口对齐和联调；上线后累计一千二百多注册用户。
+    \item 做了图片懒加载、骨架屏和长列表虚拟化，课间网络差的时候也不会白屏等待。
+\end{itemize}
+
+\entry{划词翻译浏览器插件}{独立开发 · TypeScript / Chrome Extension}{2025.02 — 2025.05}
+\subline{轻量划词翻译插件，支持多引擎切换、生词本同步与快捷键唤起。}
+\begin{itemize}
+    \item 基于 Manifest V3 与内容脚本隔离实现，冷启动八十毫秒内响应，靠同学之间传播累计三百多次安装。
+    \item 查询结果本地缓存 + 快捷键唤起，重复查询不再发请求，断网时也能查已缓存的词条。
+\end{itemize}
+
+\section{专业技能}
+\begin{itemize}
+    \skillitem{前端技术}{TypeScript、React、Vue 3、Vite、Webpack、Tailwind CSS、Canvas / ECharts}
+    \skillitem{工程与质量}{ESLint / Prettier、Vitest、Playwright、Git 分支协作、CI 自动部署}
+    \skillitem{后端了解}{Node.js / Express、RESTful 接口设计、MySQL 基础、Nginx 部署}
+    \skillitem{设计协作}{Figma 还原与走查、响应式布局、无障碍（a11y）实践}
+    \skillitem{其他}{浏览器性能调优、英文文档阅读、技术博客写作}
+\end{itemize}
+
+\end{document}

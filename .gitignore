@@ -1,0 +1,32 @@
+# LaTeX 中间产物
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb
+missfont.log
+__latexindent_temp.tex
+
+# 编译输出与预览：想提交成品 PDF 时用 git add -f main.pdf
+*.pdf
+build/
+
+# 本地私有文件：证件照不进仓库（需要时 git add -f photo.jpg）
+photo.jpg
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
